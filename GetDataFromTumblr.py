@@ -1,5 +1,6 @@
 # https://github.com/tumblr/pytumblr
 # pip install pytumblr
+# pip install pymongo
 
 import datetime
 import json
@@ -32,6 +33,15 @@ Columns taken from here:
 def mongoInsert(posts, i):
     try:
         type = posts['posts'][i]['type']
+
+
+
+        nophotosPosted = len(posts['posts'][i]['photos'])
+        print 'Summary is : ' + posts['posts'][i]['caption'].encode('utf-8')
+        print 'Photos in ' + i + 'th post : ' + nophotosPosted
+
+
+
         if (type == 'photo'):
             jsonBody = {
                 'Source': posts['blog']['url'],
@@ -81,7 +91,7 @@ def mongoInsert(posts, i):
                 'postedDate': posts['posts'][i]['date'],
                 'grabbedDate': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             }
-        mongo.insertData(jsonBody)
+        # mongo.insertData(jsonBody)
         # mongo.updateAllWithoutCondition('newParam', 'defaultValue')
     except Exception as e:
         print e
@@ -128,7 +138,7 @@ for j in xrange(j, total_posts, postLimit):
     posts = client.posts(pageName, limit=postLimit, offset=j+1)
 
     print "************************************************************"
-    print json.dumps(posts, sort_keys=True, indent=2)
+    # print json.dumps(posts, sort_keys=True, indent=2)
     print "************************************************************"
 
     for i in range(postLimit):
