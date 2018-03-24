@@ -6,12 +6,42 @@ import datetime
 import json
 import logging
 import re
+import ConfigParser
 
 import pytumblr
 
 from mongoUtil import MongoUtils
 
+##############################################################################################
+###############        Collecting Connections and Resources
+##############################################################################################
 
+# Source : https://docs.python.org/2/howto/logging.html
+logging.basicConfig(filename='pytumblr.log',
+                    format='%(asctime)s %(levelname)s %(message)s',
+                    level=logging.DEBUG,
+                    datefmt='%m/%d/%Y %I:%M:%S %p')
+
+# Initialize the Config file
+config = ConfigParser.RawConfigParser()
+config.read('config.properties')
+
+# Authenticate this via OAuth
+key = config.get('Keys', 'keys.consumerKey')
+secret = config.get('Keys', 'keys.consumerSecret')
+client = pytumblr.TumblrRestClient(key, secret)
+
+# Initialize DataBase
+ADDRESS = config.get('DatabaseSection', 'database.address')
+PORT = int(config.get('DatabaseSection', 'database.port'))
+DATABASE = config.get('DatabaseSection', 'database.database')
+
+PAGE_NAME = 'sabyaasachi'
+COLLECTION_NAME = PAGE_NAME
+
+##############################################################################################
+###############        Placing guns on the board: Defining functions
+##############################################################################################
 
 def logAndPrint(message):
     logging.info(message)
@@ -133,31 +163,13 @@ def mongoInsert(posts, i):
         print "Exception in method mongoInsert : " + str(e).encode('utf-8') + " at here : " + posts['posts'][i]['post_url']
 
 
-# Authenticate via OAuth
-client = pytumblr.TumblrRestClient(
-  'Qlc7blKjb9sacKRjFOHZpwAhqdGsPxVgfDQ1Tg8TfBrW8dSUXB',
-  '1JYw1lrlM3lUWrwXPh7DSEDeaSMZszEdxzza2rgnfGaLDcy6cI',
-  'VmL6CeGMdWSXlDjy8azZOPwFbYXlveN6Z8qqje9k80ufKrngNb',
-  'KZFkVSywraa0sQN9ovfxSEnt0Fbiligka5ldsjCOyfeOy32q1x'
-)
-
 # Make the request
-clientInfo = client.info()
-following =  client.following()
-
-# print following
+# clientInfo = client.info()
+# following =  client.following()
 # print json.dumps(following, sort_keys=True, indent=3)
 
 postLimit = 50
 j = 0
-
-
-
-PAGE_NAME = 'sabyaasachi'
-COLLECTION_NAME = PAGE_NAME
-ADDRESS = 'localhost'
-PORT = 27017
-DATABASE = 'Tumblr'
 
 total_posts = client.posts(PAGE_NAME, limit = 2)['total_posts']
 print 'Total posts : ' + str(total_posts)

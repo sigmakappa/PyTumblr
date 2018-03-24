@@ -43,8 +43,12 @@ class MongoUtils:
             #  Names can be dynamic too :     https://stackoverflow.com/a/24800102
             # db.GentlemenSpeak.insert_one(jsonFile)
             self.db[self.collection].insert_one(jsonFile)
+
         except Exception as e:
-            print str("Exception in json Insert : " + str(e))
+            if 'duplicate key error' in str(e):
+                print str('Duplicate Value :' + str(e))
+            else:
+                print str("Exception in json Insert : " + str(e))
 
 
     def update(self, jsonFile):
@@ -61,11 +65,6 @@ class MongoUtils:
         # https://stackoverflow.com/a/23347140
         self.db[self.collection].update_many({},
         {'$set': {parameter: parameterValue}})
-
-
-# Exception in json Insert : E11000 duplicate key error collection: Collection.GentlemenSpeak index: ImageURL_1 dup key: { : "https://78.media.tumblr.com/b589a083384792c3e9d1857c46125d73/tumblr_p5dfhclSzC1r52xqyo1_1280.jpg" }
-# Exception in json Insert : E11000 duplicate key error collection: Collection.GentlemenSpeak index: ImageURL_1 dup key: { : "https://78.media.tumblr.com/1fa59acc25bb10794411501dd6ccacd5/tumblr_p5bf8d1gfd1r52xqyo1_1280.jpg" }
-# Exception in json Insert : E11000 duplicate key error collection: Collection.GentlemenSpeak index: ImageURL_1 dup key: { : "https://78.media.tumblr.com/adad29456235224fb1c6d74faf3c8107/tumblr_p58ssjTU2K1r52xqyo1_1280.jpg" }
 
 
 
