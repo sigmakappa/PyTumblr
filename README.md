@@ -40,7 +40,7 @@ Copy these keys and save in the file **_config.properties_**
 
 Thanks to StackOverflow once again. Here's the complete how to [here](https://stackoverflow.com/a/20189138).
 
-###Additionals:
+### Additionals:
 - [Running MongoDB as a service (windows)](https://stackoverflow.com/a/7895724)
  
 - [Installing RoboMongo (the free lightweight GUI for MongoDB enthusiasts)](https://robomongo.org/download) This is where the actual fun begins!
