@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Welcome to PyTumblr
 
 You can use the [editor on GitHub](https://github.com/sigmakappa/PyTumblr/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
@@ -30,19 +30,17 @@ Steps to follow:
 
 ### Step 1:  Getting your own Tumblr Consumer and Secret Key (or how to register you Tumblr app first)
 
-You can get your Tumblr OAuth Consumer Key and Secret Key from here:
- 
-[Tumblr OAuth Apps Registration Page](https://www.tumblr.com/oauth/apps)
+You can get your Tumblr OAuth Consumer Key and Secret Key from here: [Tumblr OAuth Apps Registration Page](https://www.tumblr.com/oauth/apps)
 
 Once you are done, the OAuth Consumer Key and Secret Key are displayed on the apps page too later.
 
-Copy these keys and save in the file
+Copy these keys and save in the file **_config.properties_**
 
 ### Step 2:  Install MongoDB on your machine
 
 Thanks to StackOverflow once again. Here's the complete how to [here](https://stackoverflow.com/a/20189138).
 
-####Additionals:
+###Additionals:
 - [Running MongoDB as a service (windows)](https://stackoverflow.com/a/7895724)
  
 - [Installing RoboMongo (the free lightweight GUI for MongoDB enthusiasts)](https://robomongo.org/download) This is where the actual fun begins!
@@ -50,7 +48,7 @@ Thanks to StackOverflow once again. Here's the complete how to [here](https://st
 
 ### Step 3:  Running 
 
-
+_Coming soon..._
 
 
 ### Jekyll Themes
